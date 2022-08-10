@@ -5,7 +5,7 @@ var password = document.getElementById("password");
 var confirmPassword = document.getElementById("confirmPassword");
 var currentTable = document.getElementById("table");
 let regex = /[0-9]/g;
-
+let regex2 = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@([a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+))+$/;
 
 function checkName(firstName) {
    if (regex.test(firstName.value) === true || firstName.value.length == 0) {
@@ -24,6 +24,15 @@ function check2ndName(secondName) {
     return true;
 }
 
+
+function checkEmail(email) {
+	console.log(regex2.test(email.value));
+ if (regex2.test(email.value) === false) {
+	 alert("El correo electronico es invalido");
+	 return false;
+	}
+	 return true;
+}
 
 function verifyPasswords(password) {
     if (password.value != confirmPassword.value || password.value.length == 0) {
@@ -44,7 +53,7 @@ function addTableElement(firstName, secondName, email) {
 }
 
 function submitData() {
-    if (checkName(firstName) == false || check2ndName(secondName) == false || verifyPasswords(password) == false) {
+    if (checkName(firstName) == false || checkEmail(email) == false || check2ndName(secondName) == false || verifyPasswords(password) == false) {
         return;}
         addTableElement(firstName, secondName, email);
     }
